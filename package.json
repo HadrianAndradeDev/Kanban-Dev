@@ -1,0 +1,44 @@
+{
+  "name": "kanban-dev",
+  "displayName": "Kanban Dev",
+  "description": "Kanban leve e 100% local por workspace: colunas, drag & drop, checklist aninhado e comentários, sem conta e sem sair do VS Code",
+  "version": "0.0.1",
+  "license": "MIT",
+  "publisher": "hadrianandrade",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "keywords": [
+    "kanban",
+    "board",
+    "task",
+    "todo",
+    "project management",
+    "productivity"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "kanbanDev.open",
+        "title": "Kanban Dev: Abrir Board"
+      },
+      {
+        "command": "kanbanDev.newTask",
+        "title": "Kanban Dev: Nova Task"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.0"
+  }
+}
