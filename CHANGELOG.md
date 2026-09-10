@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.2
+
+- Adiciona ícone da extensão.
+- Adiciona link do repositório no Marketplace.
+
 ## 0.0.1
 
 - Versão inicial: board kanban local por workspace.

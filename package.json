@@ -2,7 +2,7 @@
   "name": "kanban-dev",
   "displayName": "Kanban Dev",
   "description": "Kanban leve e 100% local por workspace: colunas, drag & drop, checklist aninhado e comentários, sem conta e sem sair do VS Code",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "publisher": "hadrianandrade",
   "icon": "media/icon.png",
