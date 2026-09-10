@@ -4,7 +4,7 @@
   "description": "Lightweight, fully local kanban board per workspace: columns, drag and drop, nested checklists and comments, no account and no leaving VS Code",
   "version": "0.0.3",
   "license": "MIT",
-  "publisher": "kanban-dev",
+  "publisher": "HadrianAndrade",
   "icon": "media/icon.png",
   "repository": {
     "type": "git",

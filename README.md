@@ -25,7 +25,7 @@ SaaS kanban tools (Trello, Jira, etc.) require login, internet access and a cont
 
 ### Via command line
 ```bash
-code --install-extension kanban-dev.kanban-dev
+code --install-extension HadrianAndrade.kanban-dev
 ```
 
 ### Manual (.vsix)
