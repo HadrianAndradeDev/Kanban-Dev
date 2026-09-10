@@ -288,19 +288,7 @@
       },
     }, [nameSpan, el('span', { className: 'count' }, [String(tasks.length)]), actions]);
 
-    const list = el('div', {
-      className: 'task-list',
-      ondragover: (e) => { e.preventDefault(); list.parentElement.classList.add('drag-over'); },
-      ondragleave: () => list.parentElement.classList.remove('drag-over'),
-      ondrop: (e) => {
-        e.preventDefault();
-        list.parentElement.classList.remove('drag-over');
-        if (draggedTaskId) {
-          send({ type: 'moveTask', id: draggedTaskId, columnId: col.id });
-          draggedTaskId = null;
-        }
-      },
-    });
+    const list = el('div', { className: 'task-list' });
 
     for (const task of tasks) {
       list.appendChild(renderCard(task));
@@ -363,7 +351,20 @@
       children.push(addTaskBtn);
     }
 
-    return el('div', { className: 'column' }, children);
+    const columnEl = el('div', {
+      className: 'column',
+      ondragover: (e) => { e.preventDefault(); columnEl.classList.add('drag-over'); },
+      ondragleave: (e) => { if (!columnEl.contains(e.relatedTarget)) columnEl.classList.remove('drag-over'); },
+      ondrop: (e) => {
+        e.preventDefault();
+        columnEl.classList.remove('drag-over');
+        if (draggedTaskId) {
+          send({ type: 'moveTask', id: draggedTaskId, columnId: col.id });
+          draggedTaskId = null;
+        }
+      },
+    }, children);
+    return columnEl;
   }
 
   function renderCard(task) {

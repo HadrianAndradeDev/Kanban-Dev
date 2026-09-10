@@ -2,7 +2,7 @@
   "name": "kanban-dev",
   "displayName": "Kanban Dev",
   "description": "Lightweight, fully local kanban board per workspace: columns, drag and drop, nested checklists and comments, no account and no leaving VS Code",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "MIT",
   "publisher": "HadrianAndrade",
   "icon": "media/icon.png",

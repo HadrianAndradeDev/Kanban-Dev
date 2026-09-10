@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.4
+
+- Fixed drag and drop: tasks now drop correctly anywhere over a column, not just directly on top of existing cards. Makes it much easier to drop into empty columns.
+
 ## 0.0.3
 
 - Translated the entire UI, README and changelog to English.
