@@ -16,7 +16,7 @@ export function activate(context: vscode.ExtensionContext) {
       const panel = KanbanPanel.createOrShow(context.extensionUri, store);
       const board = store.get();
       const columnNames = board.columns.sort((a, b) => a.position - b.position).map((c) => c.name);
-      const chosen = await vscode.window.showQuickPick(columnNames, { placeHolder: 'Escolha a coluna' });
+      const chosen = await vscode.window.showQuickPick(columnNames, { placeHolder: 'Choose a column' });
       if (!chosen) return;
       const column = board.columns.find((c) => c.name === chosen);
       if (!column) return;

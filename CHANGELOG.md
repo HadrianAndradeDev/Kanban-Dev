@@ -1,16 +1,21 @@
 # Changelog
 
+## 0.0.3
+
+- Translated the entire UI, README and changelog to English.
+- Fixed extension icon background.
+
 ## 0.0.2
 
-- Adiciona ícone da extensão.
-- Adiciona link do repositório no Marketplace.
+- Added extension icon.
+- Added repository link on the Marketplace.
 
 ## 0.0.1
 
-- Versão inicial: board kanban local por workspace.
-- Colunas customizáveis com reordenação por drag & drop.
-- Tasks com drag & drop entre colunas.
-- Checklist aninhado por task com contagem de progresso.
-- Comentários por task.
-- Marcar task como concluída.
-- Persistência local em `.kanbn/board.json`.
+- Initial release: local kanban board per workspace.
+- Custom columns with drag and drop reordering.
+- Drag and drop tasks between columns.
+- Nested checklist per task with progress count.
+- Comments per task.
+- Mark task as complete.
+- Local persistence in `.kanbn/board.json`.

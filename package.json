@@ -1,10 +1,10 @@
 {
   "name": "kanban-dev",
   "displayName": "Kanban Dev",
-  "description": "Kanban leve e 100% local por workspace: colunas, drag & drop, checklist aninhado e comentários, sem conta e sem sair do VS Code",
-  "version": "0.0.2",
+  "description": "Lightweight, fully local kanban board per workspace: columns, drag and drop, nested checklists and comments, no account and no leaving VS Code",
+  "version": "0.0.3",
   "license": "MIT",
-  "publisher": "hadrianandrade",
+  "publisher": "kanban-dev",
   "icon": "media/icon.png",
   "repository": {
     "type": "git",
@@ -28,11 +28,11 @@
     "commands": [
       {
         "command": "kanbanDev.open",
-        "title": "Kanban Dev: Abrir Board"
+        "title": "Kanban Dev: Open Board"
       },
       {
         "command": "kanbanDev.newTask",
-        "title": "Kanban Dev: Nova Task"
+        "title": "Kanban Dev: New Task"
       }
     ]
   },

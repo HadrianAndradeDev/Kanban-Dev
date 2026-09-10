@@ -31,7 +31,7 @@ export class BoardStore {
     }
   }
 
-  /** Garante task.id numérico sequencial e nextTaskId, mesmo em boards salvos por versões antigas. */
+  /** Ensures sequential numeric task.id and nextTaskId, even for boards saved by older versions. */
   private migrate(board: Board): Board {
     const needsMigration = typeof board.nextTaskId !== 'number' || board.tasks.some((t) => typeof t.id !== 'number');
     if (!needsMigration) return board;

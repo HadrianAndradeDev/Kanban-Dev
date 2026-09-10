@@ -38,9 +38,9 @@ export interface Board {
 export function emptyBoard(): Board {
   return {
     columns: [
-      { id: 'todo', name: 'A Fazer', position: 0 },
-      { id: 'doing', name: 'Em Andamento', position: 1 },
-      { id: 'done', name: 'Concluído', position: 2 },
+      { id: 'todo', name: 'To Do', position: 0 },
+      { id: 'doing', name: 'In Progress', position: 1 },
+      { id: 'done', name: 'Done', position: 2 },
     ],
     tasks: [],
     nextTaskId: 1,

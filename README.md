@@ -1,48 +1,48 @@
 # Kanban Dev
 
-Kanban leve e local, direto no VS Code. Sem conta, sem sincronização, sem nada saindo do seu projeto — o board vive junto com o código, versionado como qualquer outro arquivo.
+A lightweight, local kanban board built into VS Code. No account, no sync, nothing leaving your project. The board lives alongside your code and can be versioned like any other file.
 
-## Por que
+## Why
 
-Ferramentas de kanban em SaaS (Trello, Jira, etc.) exigem login, internet e context-switch pra fora do editor. O Kanban Dev abre como uma aba normal do VS Code e guarda tudo em `.kanbn/board.json` na raiz do workspace — pode versionar no Git junto com o projeto ou ignorar, como preferir.
+SaaS kanban tools (Trello, Jira, etc.) require login, internet access and a context switch outside the editor. Kanban Dev opens as a regular tab inside VS Code and stores everything in `.kanbn/board.json` at the root of your workspace. You can version it with Git alongside your project, or ignore it, your choice.
 
 ## Features
 
-- **Board por projeto**: cada workspace tem seu próprio `.kanbn/board.json`, isolado dos demais.
-- **Colunas customizáveis**: crie, renomeie, exclua e reordene colunas por drag & drop (padrão: A Fazer / Em Andamento / Concluído).
-- **Tasks com drag & drop**: mova tasks entre colunas arrastando o card.
-- **Checklist aninhado**: subtarefas dentro de cada task, com contagem de progresso (ex: 3/5).
-- **Comentários por task**: histórico de anotações com timestamp.
-- **Marcar como concluída**: toggle rápido de conclusão sem precisar mover para outra coluna.
-- **100% local**: nenhum dado sai da sua máquina; não depende de internet nem de conta.
+- **Per project board**: each workspace has its own `.kanbn/board.json`, isolated from the others.
+- **Custom columns**: create, rename, delete and reorder columns via drag and drop (defaults: To Do / In Progress / Done).
+- **Drag and drop tasks**: move tasks between columns by dragging the card.
+- **Nested checklists**: subtasks inside each task, with progress count (e.g. 3/5).
+- **Comments per task**: timestamped notes history.
+- **Mark as complete**: quick completion toggle without moving the task to another column.
+- **Fully local**: no data ever leaves your machine; no internet or account required.
 
-## Como instalar
+## How to install
 
-### Pelo Marketplace
-1. Abra a aba de Extensions no VS Code (`Ctrl+Shift+X`).
-2. Busque por **Kanban Dev**.
-3. Clique em **Install**.
+### From the Marketplace
+1. Open the Extensions tab in VS Code (`Ctrl+Shift+X`).
+2. Search for **Kanban Dev**.
+3. Click **Install**.
 
-### Via linha de comando
+### Via command line
 ```bash
-code --install-extension hadrianandrade.kanban-dev
+code --install-extension kanban-dev.kanban-dev
 ```
 
 ### Manual (.vsix)
-1. Baixe o arquivo `.vsix` da release.
-2. No VS Code: `Ctrl+Shift+P` → **Extensions: Install from VSIX...** → selecione o arquivo.
+1. Download the `.vsix` file from the release.
+2. In VS Code: `Ctrl+Shift+P` then **Extensions: Install from VSIX...** and select the file.
 
-## Como usar
+## How to use
 
-1. Abra um workspace/pasta no VS Code.
-2. `Ctrl+Shift+P` → **Kanban Dev: Abrir Board** — abre o quadro em uma nova aba.
-3. `Ctrl+Shift+P` → **Kanban Dev: Nova Task** — cria uma task rapidamente, escolhendo a coluna.
-4. O board é salvo automaticamente em `.kanbn/board.json` a cada alteração.
+1. Open a workspace/folder in VS Code.
+2. `Ctrl+Shift+P` then **Kanban Dev: Open Board** opens the board in a new tab.
+3. `Ctrl+Shift+P` then **Kanban Dev: New Task** quickly creates a task by picking a column.
+4. The board is saved automatically to `.kanbn/board.json` on every change.
 
-## Dados e privacidade
+## Data and privacy
 
-O board fica inteiramente no arquivo local `.kanbn/board.json`, dentro do seu workspace. A extensão não faz nenhuma chamada de rede e não coleta telemetria.
+The board lives entirely in the local file `.kanbn/board.json`, inside your workspace. The extension makes no network calls and collects no telemetry.
 
-## Licença
+## License
 
 MIT

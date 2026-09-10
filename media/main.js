@@ -20,10 +20,10 @@
   let confirmingDeleteColumnId = null;
   let confirmingDeleteTask = false;
 
-  // Enquanto o usuário está digitando num campo de texto do modal (título/descrição),
-  // ignoramos o re-render disparado pela resposta do backend — evita perder o foco/cursor
-  // a cada tecla. O DOM já reflete o que o usuário digitou; só re-renderiza quando o
-  // campo perde o foco (autosave já disparado) ou o modal é fechado/reaberto.
+  // While the user is typing in a modal text field (title/description), we skip the
+  // re-render triggered by the backend response to avoid losing focus/cursor on every
+  // keystroke. The DOM already reflects what the user typed; it only re-renders once the
+  // field loses focus (autosave already fired) or the modal is closed/reopened.
   let suppressRenderWhileTyping = false;
 
   window.addEventListener('message', (event) => {
@@ -146,7 +146,7 @@
   function renderToolbar() {
     const search = el('input', {
       type: 'text',
-      placeholder: 'Buscar por título ou descrição...',
+      placeholder: 'Search by title or description...',
       value: searchQuery,
       oninput: (e) => { searchQuery = e.target.value; renderBoardArea(); },
     });
@@ -154,17 +154,17 @@
     const sortSelect = el('select', {
       onchange: (e) => { sortOrder = e.target.value; renderBoardArea(); },
     }, [
-      el('option', { value: 'recent', selected: sortOrder === 'recent' ? 'selected' : undefined }, ['Mais recente']),
-      el('option', { value: 'oldest', selected: sortOrder === 'oldest' ? 'selected' : undefined }, ['Mais antigo']),
+      el('option', { value: 'recent', selected: sortOrder === 'recent' ? 'selected' : undefined }, ['Most recent']),
+      el('option', { value: 'oldest', selected: sortOrder === 'oldest' ? 'selected' : undefined }, ['Oldest']),
     ]);
 
     const dateSelect = el('select', {
       onchange: (e) => { dateFilter = e.target.value; renderBoardArea(); },
     }, [
-      el('option', { value: 'all', selected: dateFilter === 'all' ? 'selected' : undefined }, ['Qualquer data']),
-      el('option', { value: 'today', selected: dateFilter === 'today' ? 'selected' : undefined }, ['Hoje']),
-      el('option', { value: 'week', selected: dateFilter === 'week' ? 'selected' : undefined }, ['Esta semana']),
-      el('option', { value: 'month', selected: dateFilter === 'month' ? 'selected' : undefined }, ['Este mês']),
+      el('option', { value: 'all', selected: dateFilter === 'all' ? 'selected' : undefined }, ['Any date']),
+      el('option', { value: 'today', selected: dateFilter === 'today' ? 'selected' : undefined }, ['Today']),
+      el('option', { value: 'week', selected: dateFilter === 'week' ? 'selected' : undefined }, ['This week']),
+      el('option', { value: 'month', selected: dateFilter === 'month' ? 'selected' : undefined }, ['This month']),
     ]);
 
     return el('div', { className: 'toolbar' }, [search, sortSelect, dateSelect]);
@@ -175,7 +175,7 @@
     let startX = 0;
     let startScroll = 0;
     boardEl.addEventListener('mousedown', (e) => {
-      if (e.target !== boardEl) return; // só arrasta clicando no fundo vazio, não em colunas/cards
+      if (e.target !== boardEl) return; // only pan when clicking empty background, not columns/cards
       isPanning = true;
       startX = e.clientX;
       startScroll = boardEl.scrollLeft;
@@ -211,11 +211,11 @@
         className: 'add-column-btn',
         onclick: () => { addingColumn = true; render(); },
       }, []);
-      btn.innerHTML = ICON_PLUS + '<span>Nova coluna</span>';
+      btn.innerHTML = ICON_PLUS + '<span>New column</span>';
       return el('div', { className: 'add-column' }, [btn]);
     }
 
-    const input = el('input', { type: 'text', placeholder: 'Nome da coluna' });
+    const input = el('input', { type: 'text', placeholder: 'Column name' });
     let settled = false;
     const commit = () => {
       if (settled) return;
@@ -236,8 +236,8 @@
       if (e.key === 'Escape') cancel();
     });
 
-    const confirmBtn = el('button', { className: 'btn', onmousedown: (e) => e.preventDefault(), onclick: commit }, ['Criar']);
-    const cancelBtn = el('button', { className: 'btn secondary', onmousedown: (e) => e.preventDefault(), onclick: cancel }, ['Cancelar']);
+    const confirmBtn = el('button', { className: 'btn', onmousedown: (e) => e.preventDefault(), onclick: commit }, ['Create']);
+    const cancelBtn = el('button', { className: 'btn secondary', onmousedown: (e) => e.preventDefault(), onclick: cancel }, ['Cancel']);
 
     const form = el('div', { className: 'add-column-form' }, [
       input,
@@ -267,8 +267,8 @@
     };
     nameSpan.addEventListener('dblclick', startRename);
 
-    const editBtn = iconBtn(ICON_EDIT, 'Renomear coluna', startRename);
-    const deleteBtn = iconBtn(ICON_TRASH, 'Excluir coluna', () => { confirmingDeleteColumnId = col.id; render(); }, 'icon-danger');
+    const editBtn = iconBtn(ICON_EDIT, 'Rename column', startRename);
+    const deleteBtn = iconBtn(ICON_TRASH, 'Delete column', () => { confirmingDeleteColumnId = col.id; render(); }, 'icon-danger');
     const actions = el('div', { className: 'actions' }, [editBtn, deleteBtn]);
 
     const header = el('div', {
@@ -306,23 +306,23 @@
       list.appendChild(renderCard(task));
     }
     if (tasks.length === 0) {
-      list.appendChild(el('div', { className: 'empty-hint' }, ['Crie sua primeira tarefa']));
+      list.appendChild(el('div', { className: 'empty-hint' }, ['Create your first task']));
     }
 
     const children = [header];
 
     if (confirmingDeleteColumnId === col.id) {
       const confirmBar = el('div', { className: 'confirm-bar' }, [
-        el('span', {}, [`Excluir "${col.name}" e todas as suas tasks? Essa ação não pode ser desfeita.`]),
+        el('span', {}, [`Delete "${col.name}" and all its tasks? This action cannot be undone.`]),
         el('div', { className: 'actions' }, [
           el('button', {
             className: 'btn danger',
             onclick: () => { send({ type: 'deleteColumn', id: col.id }); confirmingDeleteColumnId = null; },
-          }, ['Excluir']),
+          }, ['Delete']),
           el('button', {
             className: 'btn secondary',
             onclick: () => { confirmingDeleteColumnId = null; render(); },
-          }, ['Cancelar']),
+          }, ['Cancel']),
         ]),
       ]);
       children.push(confirmBar);
@@ -331,7 +331,7 @@
     children.push(list);
 
     if (addingTaskColumnId === col.id) {
-      const input = el('input', { type: 'text', placeholder: 'Título da tarefa...', className: 'new-task-input' });
+      const input = el('input', { type: 'text', placeholder: 'Task title...', className: 'new-task-input' });
       let settled = false;
       const commit = () => {
         if (settled) return;
@@ -359,7 +359,7 @@
         className: 'add-task-btn',
         onclick: () => { addingTaskColumnId = col.id; render(); },
       }, []);
-      addTaskBtn.innerHTML = ICON_PLUS + '<span>Adicionar tarefa</span>';
+      addTaskBtn.innerHTML = ICON_PLUS + '<span>Add task</span>';
       children.push(addTaskBtn);
     }
 
@@ -377,8 +377,8 @@
 
     const { done, total } = countChecklist(task.checklist || []);
     const metaParts = [];
-    if (total > 0) metaParts.push(`${done}/${total} itens`);
-    if ((task.comments || []).length > 0) metaParts.push(`${task.comments.length} comentário${task.comments.length > 1 ? 's' : ''}`);
+    if (total > 0) metaParts.push(`${done}/${total} items`);
+    if ((task.comments || []).length > 0) metaParts.push(`${task.comments.length} comment${task.comments.length > 1 ? 's' : ''}`);
 
     const meta = metaParts.length ? el('div', { className: 'meta' }, [metaParts.join('  ·  ')]) : null;
     const idTag = el('div', { className: 'card-id' }, [`#${task.id}`]);
@@ -408,7 +408,7 @@
       titleTimer = setTimeout(() => send({ type: 'updateTask', id: task.id, patch: { title: titleInput.value } }), 400);
     });
 
-    const descInput = el('textarea', { placeholder: 'Descrição...' }, []);
+    const descInput = el('textarea', { placeholder: 'Description...' }, []);
     descInput.value = task.description || '';
     let descTimer = null;
     descInput.addEventListener('focus', () => { suppressRenderWhileTyping = true; });
@@ -418,22 +418,22 @@
       descTimer = setTimeout(() => send({ type: 'updateTask', id: task.id, patch: { description: descInput.value } }), 400);
     });
 
-    const closeBtn = iconBtn(ICON_CLOSE, 'Fechar', () => { openTaskId = null; confirmingDeleteTask = false; render(); });
+    const closeBtn = iconBtn(ICON_CLOSE, 'Close', () => { openTaskId = null; confirmingDeleteTask = false; render(); });
 
     let headerRight;
     if (confirmingDeleteTask) {
       headerRight = el('div', { className: 'confirm-bar', style: 'margin:0;' }, [
-        el('span', {}, ['Excluir esta task?']),
+        el('span', {}, ['Delete this task?']),
         el('div', { className: 'actions' }, [
           el('button', {
             className: 'btn danger',
             onclick: () => { send({ type: 'deleteTask', id: task.id }); openTaskId = null; confirmingDeleteTask = false; render(); },
-          }, ['Excluir']),
-          el('button', { className: 'btn secondary', onclick: () => { confirmingDeleteTask = false; render(); } }, ['Cancelar']),
+          }, ['Delete']),
+          el('button', { className: 'btn secondary', onclick: () => { confirmingDeleteTask = false; render(); } }, ['Cancel']),
         ]),
       ]);
     } else {
-      const deleteBtn = iconBtn(ICON_TRASH, 'Excluir task', () => { confirmingDeleteTask = true; render(); }, 'icon-danger');
+      const deleteBtn = iconBtn(ICON_TRASH, 'Delete task', () => { confirmingDeleteTask = true; render(); }, 'icon-danger');
       headerRight = el('div', { className: 'actions' }, [deleteBtn, closeBtn]);
     }
 
@@ -462,7 +462,7 @@
     const { done, total } = countChecklist(items);
 
     const titleEl = el('div', { className: 'section-title' }, [
-      `Checklist${total > 0 ? ` — ${done}/${total}` : ''}`,
+      `Checklist${total > 0 ? ` (${done}/${total})` : ''}`,
     ]);
 
     const list = el('div', {}, items.map((item, idx) => renderChecklistItem(task, items, item, idx)));
@@ -475,7 +475,7 @@
         send({ type: 'updateTask', id: task.id, patch: { checklist: next } });
       },
     }, []);
-    addBtn.innerHTML = ICON_PLUS + '<span>Adicionar item</span>';
+    addBtn.innerHTML = ICON_PLUS + '<span>Add item</span>';
 
     return el('div', {}, [titleEl, list, addBtn]);
   }
@@ -491,7 +491,7 @@
       },
     });
 
-    const textInput = el('input', { type: 'text', value: item.text, placeholder: 'Descreva o item...' });
+    const textInput = el('input', { type: 'text', value: item.text, placeholder: 'Describe the item...' });
     let timer = null;
     textInput.addEventListener('focus', () => { suppressRenderWhileTyping = true; });
     textInput.addEventListener('blur', () => { suppressRenderWhileTyping = false; });
@@ -504,7 +504,7 @@
       }, 400);
     });
 
-    const removeBtn = iconBtn(ICON_TRASH, 'Remover item', () => {
+    const removeBtn = iconBtn(ICON_TRASH, 'Remove item', () => {
       const next = items.filter((_, i) => i !== idx);
       send({ type: 'updateTask', id: task.id, patch: { checklist: next } });
     }, 'icon-danger');
@@ -513,19 +513,19 @@
   }
 
   function renderCommentsSection(task) {
-    const titleEl = el('div', { className: 'section-title' }, ['Comentários']);
+    const titleEl = el('div', { className: 'section-title' }, ['Comments']);
 
     const comments = task.comments || [];
     const list = comments.length
       ? el('div', {}, comments.slice().reverse().map((c) =>
           el('div', { className: 'comment' }, [
             el('div', {}, [c.text]),
-            el('div', { className: 'date' }, [new Date(c.createdAt).toLocaleString('pt-BR')]),
+            el('div', { className: 'date' }, [new Date(c.createdAt).toLocaleString('en-US')]),
           ])
         ))
-      : el('div', { className: 'empty-hint' }, ['Nenhum comentário ainda']);
+      : el('div', { className: 'empty-hint' }, ['No comments yet']);
 
-    const input = el('input', { type: 'text', placeholder: 'Escrever um comentário e pressionar Enter...' });
+    const input = el('input', { type: 'text', placeholder: 'Write a comment and press Enter...' });
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && input.value.trim()) {
         send({ type: 'addComment', taskId: task.id, text: input.value.trim() });
